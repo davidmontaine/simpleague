@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">      
+
+    <h:head>
+        <title>#{msg['template.title']}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}" />		
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <h:outputStylesheet name="/css/simpleague.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>        
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                   <button class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <h:link class="navbar-brand" value="#{msg['template.title']}" outcome="/index.xhtml" />
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><h:link value="#{msg['template.home']}" outcome="/index.xhtml" /></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">#{msg['template.options']}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link value="#{msg['template.league']}" outcome="/auth/league.xhtml" /></li>
+                            </ul>
+                        </li>
+                        <li><h:link value="#{msg['template.about']}" outcome="/about.xhtml" /></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" jsf:rendered="#{login.credentials.email == null}">
+                        <li><h:link outcome="/signup.xhtml"><span class="glyphicon glyphicon-user"></span>&nbsp;#{msg['template.signup']}</h:link></li>
+                        <li><h:link outcome="/auth/league.xhtml"><span class="glyphicon glyphicon-log-in"></span>&nbsp;#{msg['template.login']}</h:link></li>
+                    </ul>
+                    <h:form rendered="#{login.credentials.email != null}">
+                        <ul class="nav navbar-nav navbar-right">                            
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;#{login.credentials.email}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><h:link value="#{msg['template.account.update']}" outcome="/auth/account.xhtml" /></li>
+                                    <li><h:link value="#{msg['template.account.reset']}" outcome="/auth/password.xhtml" /></li>
+                                    <li><hr /></li>                                                                        
+                                    <li><h:commandLink action="#{logout.logout()}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;#{msg['template.logout']}</h:commandLink></li>                                    
+                                </ul>
+                            </li>                            
+                        </ul>
+                    </h:form>
+                </div>
+            </div>
+        </nav>        
+        <div class="container">
+            <br />
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+    </h:body>
+</html>

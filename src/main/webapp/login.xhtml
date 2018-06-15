@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">            
+
+    <h:body>
+        <ui:composition template="template.xhtml">
+            <ui:define name="content">
+                <h3>#{msg['login.heading']}</h3>
+                <h:form role="form" class="form-horizontal" id="loginForm">
+                    <h:inputHidden id="url" value="#{login.url}" />
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <h:outputText value="#{login.error}" escape="false" style="color:#a94442" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="email">#{msg['login.email']}</label>
+                            <h:inputText class="form-control" id="email" p:autofocus="true" maxlength="50" value="#{login.credentials.email}">
+                                <f:validator validatorId="EmailValidator" />
+                                <f:attribute name="emailValidatorMessage" value="#{msg['login.email.invalid']}" />                                                                                                
+                            </h:inputText>
+                            <h:message id="emailMessage" for="email" style="color:#a94442" />                            
+                        </div>
+                    </div> 
+                    <div class="form-group">                    
+                        <div class="col-xs-6">                        
+                            <label for="password">#{msg['login.password']}</label>
+                            <h:inputSecret class="form-control" id="password" maxlength="10" value="#{login.credentials.passwordText}" />
+                            <h:message id="passwordMessage" for="password" style="color:#a94442" />                                                        
+                        </div>
+                    </div>                    
+                    <div class="btn-toolbar">                        
+                        <h:commandButton class="btn btn-primary btn-primary-spacing" id="submit" value="#{msg['login.submit']}" action="#{login.submit}" />
+                        <h:button class="btn btn-default btn-primary-spacing" value="#{msg['login.cancel']}" outcome="index.xhtml" />
+                        &nbsp;
+                        <h:link outcome="forgotPassword.xhtml">#{msg['login.password.forgot']}</h:link>
+                    </div>
+                </h:form>
+                
+                <script>
+                    //<![CDATA[
+                    function enable() {
+                        if ($("#loginForm\\:email").val() && $("#loginForm\\:password").val()) {
+                            $("#loginForm\\:submit").prop("disabled", false);
+                        } else {
+                            $("#loginForm\\:submit").prop("disabled", true);
+                        }                        
+                    }
+                    
+                    $(document).ready(function() {                       
+                        enable();
+                        
+                        $("input").keyup(function() {
+                            enable();
+                        });
+                        if ($("#loginForm\\:emailMessage").text()) {
+                            $("#loginForm\\:email").parent().parent().addClass("has-error");
+                        }                                                  
+                    });                    
+                    //]]>
+                </script>                        
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

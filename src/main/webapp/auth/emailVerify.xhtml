@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:body>
+        <ui:composition template="../template.xhtml">
+            <ui:define name="content">
+                <h3>#{msg['emailVerify.heading']}</h3>
+                <h:form role="form" class="form-horizontal" id="emailVerifyForm">
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <h:outputText value="#{emailVerify.error}" escape="false" style="color:#a94442" />
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <div class="col-xs-6">                                        
+                            #{msg['emailVerify.text1']}
+                            <h:link value="#{msg['emailVerify.text2']}" outcome="/auth/league.xhtml" />
+                            <br />
+                            <br />
+                            #{msg['emailVerify.text3']}
+                            <h:commandLink action="#{emailVerify.submit}" value="#{msg['emailVerify.text4']}" />                    
+                        </div>
+                    </div>                                                
+                </h:form>                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

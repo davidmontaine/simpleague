@@ -1,0 +1,9 @@
+.form-group.required .control-label:before {
+    color: red;
+    content: "*";
+    font-family: 'Glyphicons Halflings';
+    font-size: 9px;
+    font-weight: normal;    
+    margin-left: -15px;
+    position: absolute;
+}            
