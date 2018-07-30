@@ -28,9 +28,7 @@ public class AccountHelper {
         
         if (!user.getCredentials().getEmail().equalsIgnoreCase(emailCurrent)) {
             emailChanged = true;
-            user.setVerified("N");
-            user.setEmailCount(0);
-            user.setPasswordCount(0);
+            user.resetEmailRelated();
         }
         user = userBean.update(user);
             

@@ -2,7 +2,7 @@
 
 /*CREATE DATABASE `simpleague`*/ /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-/*DROP TABLE IF EXISTS `simpleague`.`users_leagues`;*/
+DROP TABLE IF EXISTS `simpleague`.`user`;
 
 CREATE TABLE `simpleague`.`user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE `simpleague`.`user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `uuid_UNIQUE` (`uuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DELIMITER $$
 
