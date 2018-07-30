@@ -71,7 +71,7 @@ public class UserResource {
             User user = userBean.findByEmail(userCurrent.getEmailCurrent());
             user.setName(userCurrent.getName());
             user.getCredentials().setEmail(userCurrent.getCredentials().getEmail());            
-            accountHelper.process(user, userCurrent.getEmailCurrent(), ApplicationUtil.getUri(req));
+            accountHelper.process(user, userCurrent.getEmailCurrent(), ApplicationUtil.getUriHost(req));
             return new Response(Result.SUCCESS);
         } catch (Exception e) {
             logger.log(Level.INFO, "exception: {0}", e.getMessage());                        
