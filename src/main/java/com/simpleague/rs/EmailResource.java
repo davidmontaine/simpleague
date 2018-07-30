@@ -33,7 +33,7 @@ public class EmailResource {
         try {
             logger.log(Level.INFO, "in email()");
             User user = userBean.findByEmail(cred.getEmail());
-            accountHelper.email(user, ApplicationUtil.getUri(req));
+            accountHelper.email(user, ApplicationUtil.getUriHost(req));
             return new Response(Result.SUCCESS);
         } catch (Exception e) {
             logger.log(Level.INFO, "exception: {0}", e.getMessage());                        

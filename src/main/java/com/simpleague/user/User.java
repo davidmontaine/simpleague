@@ -40,7 +40,7 @@ public class User implements Serializable {
     @Column(name = "group_name", insertable = false, updatable = false)    
     private String groupName;
 
-    @Column(name = "uuid", updatable = false)
+    @Column(name = "uuid")
     private String uuid = UUID.randomUUID().toString(); 
     
     @Column(name = "verified", insertable = false)
@@ -150,4 +150,11 @@ public class User implements Serializable {
     public int getVersion() {
         return version;
     }
+    
+    public void resetEmailRelated() {
+        verified = "N";
+        emailCount = 0;
+        passwordCount = 0;
+        uuid = UUID.randomUUID().toString();
+    }        
 }
