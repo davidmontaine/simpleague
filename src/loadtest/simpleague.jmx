@@ -279,14 +279,14 @@
                   <elementProp name="loginForm%3Aemail" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">loginForm%3Aemail</stringProp>
-                    <stringProp name="Argument.value">john@test.com</stringProp>
+                    <stringProp name="Argument.value">dave@test.com</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="loginForm%3Apassword" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.name">loginForm%3Apassword</stringProp>
-                    <stringProp name="Argument.value">johnjohn</stringProp>
+                    <stringProp name="Argument.value">davetest</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
@@ -791,21 +791,21 @@
                   <elementProp name="accountForm:emailCurrent" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">true</boolProp>
                     <stringProp name="Argument.name">accountForm:emailCurrent</stringProp>
-                    <stringProp name="Argument.value">john@test.com</stringProp>
+                    <stringProp name="Argument.value">dave@test.com</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="accountForm:name" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">true</boolProp>
                     <stringProp name="Argument.name">accountForm:name</stringProp>
-                    <stringProp name="Argument.value">John ${middleinitial}</stringProp>
+                    <stringProp name="Argument.value">Dave ${middleinitial}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
                   <elementProp name="accountForm:email" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">true</boolProp>
                     <stringProp name="Argument.name">accountForm:email</stringProp>
-                    <stringProp name="Argument.value">john@test.com</stringProp>
+                    <stringProp name="Argument.value">dave@test.com</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                     <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   </elementProp>
