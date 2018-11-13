@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
@@ -27,28 +26,38 @@ public class UserBeanTest {
     @InjectMocks
     private UserBean userBean;
     
-    private Credentials cred;
     private User user;
     private User newUser;
+    
+    private Integer expId = 1;
+    private String expName = "Dave";
+    private String expEmail = "dave@test.com";
+    private String expPasswordText = "davetest";
+    private String expGroupName = "USER";
+    private String expUuid = "123456789";    
+    private Integer expEmailCount = 0;
+    private Integer expPasswordCount = 0;
+    private String expVerified = "Y";
+    private String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());                
     
     @Before
     public void setUp() {
         userBean = new UserBean();
         MockitoAnnotations.initMocks(this);
         
-        cred = new Credentials();
-        cred.setEmail("dave@test.com");
-        cred.setPasswordText("davetest");
+        Credentials cred = new Credentials();
+        cred.setEmail(expEmail);
+        cred.setPasswordText(expPasswordText);
         
         user = new User();
-        user.setId(1);
-        user.setName("Dave");
+        user.setId(expId);
+        user.setName(expName);
         user.setCredentials(cred);
-        user.setGroupName("group");
-        user.setUuid("123456789");
-        user.setEmailCount(0);
-        user.setPasswordCount(0);
-        user.setVerified("Y");
+        user.setGroupName(expGroupName);
+        user.setUuid(expUuid);
+        user.setEmailCount(expEmailCount);
+        user.setPasswordCount(expPasswordCount);
+        user.setVerified(expVerified);
         user.setCreatedDate(new Date());
         
         newUser = null;
@@ -72,18 +81,6 @@ public class UserBeanTest {
     @Test
     public void testCreate() throws Exception {
         System.out.println("create");
-        
-        Integer expId = 1;
-        String expName = "Dave";
-        String expEmail = "dave@test.com";
-        String expPasswordText = "davetest";
-        String expGroupName = "group";
-        String expUuid = "123456789";
-        Integer expEmailCount = 0;
-        Integer expPasswordCount = 0;
-        String expVerified = "Y";
-        String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());        
-        
         userBean.create(user);
         
         assertNotNull(newUser);
@@ -104,18 +101,6 @@ public class UserBeanTest {
     public void testFind() {
         System.out.println("find");
         Integer id = 1;
-        
-        Integer expId = 1;
-        String expName = "Dave";
-        String expEmail = "dave@test.com";
-        String expPasswordText = "davetest";
-        String expGroupName = "group";
-        String expUuid = "123456789";
-        Integer expEmailCount = 0;
-        Integer expPasswordCount = 0;
-        String expVerified = "Y";
-        String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());        
-        
         User result = userBean.find(id);
         
         assertNotNull(result);
@@ -136,18 +121,6 @@ public class UserBeanTest {
     public void testFindByEmail() throws Exception {
         System.out.println("findByEmail");
         String email = "dave@test.com";
-        
-        Integer expId = 1;
-        String expName = "Dave";
-        String expEmail = "dave@test.com";
-        String expPasswordText = "davetest";
-        String expGroupName = "group";
-        String expUuid = "123456789";
-        Integer expEmailCount = 0;
-        Integer expPasswordCount = 0;
-        String expVerified = "Y";
-        String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());        
-        
         User result = userBean.findByEmail(email);
         
         assertNotNull(result);
@@ -168,19 +141,7 @@ public class UserBeanTest {
     public void testFindByUuid() throws Exception {
         System.out.println("findByUuid");
         String uuid = "123456789";
-        
-        Integer expId = 1;
-        String expName = "Dave";
-        String expEmail = "dave@test.com";
-        String expPasswordText = "davetest";
-        String expGroupName = "group";
-        String expUuid = "123456789";
-        Integer expEmailCount = 0;
-        Integer expPasswordCount = 0;
-        String expVerified = "Y";
-        String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());        
-        
-        User result = userBean.findByEmail(uuid);
+        User result = userBean.findByUuid(uuid);
         
         assertNotNull(result);
         assertEquals(expId, result.getId());
@@ -199,18 +160,6 @@ public class UserBeanTest {
     @Test
     public void testUpdate() throws Exception {
         System.out.println("update");
-        
-        Integer expId = 1;
-        String expName = "Dave";
-        String expEmail = "dave@test.com";
-        String expPasswordText = "davetest";
-        String expGroupName = "group";
-        String expUuid = "123456789";
-        Integer expEmailCount = 0;
-        Integer expPasswordCount = 0;
-        String expVerified = "Y";
-        String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());        
-        
         User result = userBean.update(user);
         
         assertNotNull(result);
@@ -226,4 +175,10 @@ public class UserBeanTest {
         assertEquals(expVerified, result.getVerified());
         assertEquals(expCreatedDate, new SimpleDateFormat("dd/MM/yyyy").format(result.getCreatedDate()));
     }
+
+    @Test
+    public void testDelete() throws Exception {
+        System.out.println("delete");
+        userBean.delete(user);
+    }    
 }
