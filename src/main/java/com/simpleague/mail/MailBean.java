@@ -48,21 +48,17 @@ public class MailBean {
             logger.log(Level.INFO, "exception: {0}", e.getMessage());            
         }
     }
-    
-    public void send(String toAddress, String subject, String messageText) throws Exception {
-        send(fromAddress, toAddress, subject, messageText);
-    }    
 	
-    public void send(String fromAddress, String[] toAddress, String subject, String messageText) throws Exception {
+    public void send(String[] toAddress, String subject, String messageText) throws Exception {
         String ta = "";
 
         for (int i = 0; i < toAddress.length; i++) {
             ta += (i == 0 ? "" : ", ") + toAddress[i];
         }
-        send(fromAddress, ta, subject, messageText);
+        send(ta, subject, messageText);
     }	    
 
-    public void send(String fromAddress, String toAddress, String subject, String messageText) throws Exception {
+    public void send(String toAddress, String subject, String messageText) throws Exception {
         logger.log(Level.INFO, "in send()");            
         
         if (this.toAddressTesting != null) {
