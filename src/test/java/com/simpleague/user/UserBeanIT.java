@@ -27,7 +27,7 @@ public class UserBeanIT {
     private Integer expEmailCount = 0;
     private Integer expPasswordCount = 0;
     private String expVerified = "N";
-    private String expCreatedDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());            
+    private String expDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());            
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -37,7 +37,7 @@ public class UserBeanIT {
     }
 
     @Before
-    public void testCreate() throws Exception {
+    public void testCreate() {
         System.out.println("create");
 
         Credentials cred = new Credentials();
@@ -52,59 +52,53 @@ public class UserBeanIT {
     }
     
     @After
-    public void testDelete() throws Exception {
+    public void testDelete() {
         System.out.println("delete");
         User user = userBean.findByEmail(expEmail);
         userBean.delete(user);
     }        
 
     @Test
-    public void test() throws Exception {
+    public void test() {
         System.out.println("findByEmail");
         User user = userBean.findByEmail(expEmail);
+        assertFields(user);
+        assertEquals(expName, user.getName());        
+        assertEquals(null, user.getModifiedDate());                                
+
+        System.out.println("find");
+        Integer userId = user.getId();
+        user = userBean.find(userId);
+        assertFields(user);
+        assertEquals(expName, user.getName());        
+        assertEquals(null, user.getModifiedDate());                                        
         
-        assertNotNull(user);
-        assertNotNull(user.getId());
-        assertEquals(expName, user.getName());
-        assertNotNull(user.getCredentials());
-        assertEquals(expEmail, user.getCredentials().getEmail());
-        assertEquals(expGroupName, user.getGroupName());
-        assertNotNull(user.getUuid());
-        assertEquals(expEmailCount, user.getEmailCount());
-        assertEquals(expPasswordCount, user.getPasswordCount());
-        assertEquals(expVerified, user.getVerified());
-        assertEquals(expCreatedDate, new SimpleDateFormat("dd/MM/yyyy").format(user.getCreatedDate()));                        
+        System.out.println("findByUuid");
+        String uuid = user.getUuid();
+        user = userBean.findByUuid(uuid);
+        assertFields(user);
+        assertEquals(expName, user.getName());        
+        assertEquals(null, user.getModifiedDate());                                        
 
         System.out.println("update");        
         String expNameNew = "Dave New";
         user.setName(expNameNew);
         user = userBean.update(user);
-        
-        assertNotNull(user);
-        assertNotNull(user.getId());
-        assertEquals(expNameNew, user.getName());
-        assertNotNull(user.getCredentials());
-        assertEquals(expEmail, user.getCredentials().getEmail());
-        assertEquals(expGroupName, user.getGroupName());
-        assertNotNull(user.getUuid());
-        assertEquals(expEmailCount, user.getEmailCount());
-        assertEquals(expPasswordCount, user.getPasswordCount());
-        assertEquals(expVerified, user.getVerified());
-        assertEquals(expCreatedDate, new SimpleDateFormat("dd/MM/yyyy").format(user.getCreatedDate()));                                
-        
-        System.out.println("findByEmail");        
-        user = userBean.findByEmail(expEmail);        
-        
-        assertNotNull(user);
-        assertNotNull(user.getId());
-        assertEquals(expNameNew, user.getName());
-        assertNotNull(user.getCredentials());
-        assertEquals(expEmail, user.getCredentials().getEmail());
-        assertEquals(expGroupName, user.getGroupName());
-        assertNotNull(user.getUuid());
-        assertEquals(expEmailCount, user.getEmailCount());
-        assertEquals(expPasswordCount, user.getPasswordCount());
-        assertEquals(expVerified, user.getVerified());
-        assertEquals(expCreatedDate, new SimpleDateFormat("dd/MM/yyyy").format(user.getCreatedDate()));                
+        assertFields(user);
+        assertEquals(expNameNew, user.getName());        
+        assertEquals(expDate, new SimpleDateFormat("dd/MM/yyyy").format(user.getModifiedDate()));                                        
     }        
+    
+    public void assertFields(User user) {
+        assertNotNull(user);
+        assertNotNull(user.getId());
+        assertNotNull(user.getCredentials());
+        assertEquals(expEmail, user.getCredentials().getEmail());
+        assertEquals(expGroupName, user.getGroupName());
+        assertNotNull(user.getUuid());
+        assertEquals(expEmailCount, user.getEmailCount());
+        assertEquals(expPasswordCount, user.getPasswordCount());
+        assertEquals(expVerified, user.getVerified());
+        assertEquals(expDate, new SimpleDateFormat("dd/MM/yyyy").format(user.getCreatedDate()));                                
+    }
 }
