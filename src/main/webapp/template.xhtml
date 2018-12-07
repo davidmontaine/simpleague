@@ -32,14 +32,14 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">#{msg['template.options']}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><h:link value="#{msg['template.league']}" outcome="/auth/league.xhtml" /></li>
+                                <li><h:link value="#{msg['template.leagues']}" outcome="/auth/leagues.xhtml" /></li>
                             </ul>
                         </li>
                         <li><h:link value="#{msg['template.about']}" outcome="/about.xhtml" /></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" jsf:rendered="#{login.credentials.email == null}">
                         <li><h:link outcome="/signup.xhtml"><span class="glyphicon glyphicon-user"></span>&nbsp;#{msg['template.signup']}</h:link></li>
-                        <li><h:link outcome="/auth/league.xhtml"><span class="glyphicon glyphicon-log-in"></span>&nbsp;#{msg['template.login']}</h:link></li>
+                        <li><h:link outcome="/auth/leagues.xhtml"><span class="glyphicon glyphicon-log-in"></span>&nbsp;#{msg['template.login']}</h:link></li>
                     </ul>
                     <h:form rendered="#{login.credentials.email != null}">
                         <ul class="nav navbar-nav navbar-right">                            

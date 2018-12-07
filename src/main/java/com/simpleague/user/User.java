@@ -36,6 +36,9 @@ public class User implements Serializable {
     
     @Column(name = "name")    
     private String name;    
+
+    @Embedded
+    private Credentials credentials = new Credentials();
     
     @Column(name = "group_name", insertable = false, updatable = false)    
     private String groupName;
@@ -51,6 +54,10 @@ public class User implements Serializable {
     
     @Column(name = "password_count", insertable = false)    
     private Integer passwordCount;    
+
+    @Version
+    @Column(name = "version")
+    private int version;
     
     @Column(name = "created_date", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)    
@@ -59,13 +66,6 @@ public class User implements Serializable {
     @Column(name = "modified_date", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
-
-    @Version
-    @Column(name = "version")
-    private int version;
-
-    @Embedded
-    private Credentials credentials = new Credentials();
     
     public Date getCreatedDate() {
         return createdDate;
