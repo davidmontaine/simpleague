@@ -54,6 +54,6 @@ public class Password extends PasswordVerify {
             error = FacesUtil.getResourceString("msg", "password.exception");
             return null;            
         }
-        return "/auth/league.xhtml";        
+        return "/auth/leagues.xhtml";        
     }
 }

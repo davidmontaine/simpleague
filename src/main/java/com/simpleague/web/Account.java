@@ -1,6 +1,7 @@
 package com.simpleague.web;
 
 import com.simpleague.helper.AccountHelper;
+import com.simpleague.user.Credentials;
 import com.simpleague.user.User;
 import com.simpleague.user.UserBean;
 import java.io.Serializable;
@@ -62,7 +63,9 @@ public class Account implements Serializable {
             logger.log(Level.INFO, "in submit()");            
             
             if (accountHelper.process(user, emailCurrent, FacesUtil.getUri())) {
-                login.setCredentials(user.getCredentials());                
+                Credentials cred = login.getCredentials();
+                cred.setEmail(user.getCredentials().getEmail());
+                login.setCredentials(cred);                
                 return "/auth/emailVerify.xhtml";
             }
         } catch (Exception e) {
@@ -70,6 +73,6 @@ public class Account implements Serializable {
             error = FacesUtil.getResourceString("msg", "account.exception");
             return null;            
         }
-        return "/auth/league.xhtml";
+        return "/auth/leagues.xhtml";
     }
 }
