@@ -9,7 +9,7 @@
     <repositories>
         <repository>
             <id>nl.captcha</id>
-            <url>http://repo.enonic.com/public/</url>
+            <url>http://repo.enonic.com/public</url>
         </repository>
     </repositories>    
     <dependencyManagement>
@@ -103,7 +103,7 @@
                             <goal>verify</goal>                            
                         </goals>
                         <configuration>
-                            <skipITs>true</skipITs>
+                            <skipITs>false</skipITs>
                         </configuration>
                     </execution>
                 </executions>

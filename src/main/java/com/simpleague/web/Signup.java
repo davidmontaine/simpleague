@@ -50,7 +50,9 @@ public class Signup extends PasswordVerify {
     public String submit() throws Exception {
         try {
             logger.log(Level.INFO, "in submit()");                    
+            String passwordText = user.getCredentials().getPasswordText();
             userBean.create(user);            
+            user.getCredentials().setPasswordText(passwordText);
             FacesUtil.getRequest().login(user.getCredentials().getEmail(), user.getCredentials().getPasswordText());            
             login.setCredentials(user.getCredentials());
             mailBean.send(user.getCredentials().getEmail(),

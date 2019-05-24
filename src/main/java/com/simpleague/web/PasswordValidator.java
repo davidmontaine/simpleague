@@ -9,7 +9,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 
-@FacesValidator("PasswordValidator")
+@FacesValidator(value = "PasswordValidator", managed = true)
 public class PasswordValidator implements Validator {
     @Inject
     private Login login;

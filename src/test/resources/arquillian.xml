@@ -6,7 +6,7 @@
 
     <container qualifier="glassfish" default="true">
         <configuration>
-            <property name="glassFishHome">C:\glassfish-4.1</property>
+            <property name="glassFishHome">C:\Users\david\glassfish5</property>
 	    <property name="allowConnectingToRunningServer">true</property>
         </configuration>
     </container>
