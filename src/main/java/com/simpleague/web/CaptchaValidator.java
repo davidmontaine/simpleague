@@ -10,7 +10,7 @@ import javax.faces.validator.ValidatorException;
 
 import nl.captcha.Captcha;
 
-@FacesValidator("CaptchaValidator")
+@FacesValidator(value = "CaptchaValidator", managed = true)
 public class CaptchaValidator implements Validator {
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {

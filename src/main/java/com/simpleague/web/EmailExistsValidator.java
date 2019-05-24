@@ -12,7 +12,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 
-@FacesValidator("EmailExistsValidator")
+@FacesValidator(value = "EmailExistsValidator", managed = true)
 public class EmailExistsValidator implements Validator {
     @Inject
     private UserBean userBean;
