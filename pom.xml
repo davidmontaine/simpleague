@@ -103,7 +103,7 @@
                             <goal>verify</goal>                            
                         </goals>
                         <configuration>
-                            <skipITs>false</skipITs>
+                            <skipITs>true</skipITs>
                         </configuration>
                     </execution>
                 </executions>
