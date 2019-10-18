@@ -11,7 +11,7 @@
 ::docker network ls
 ::docker network rm mynet
 
-mvn clean package
-docker image build -t simpleague .
 docker container rm -f simpleague
+call mvn clean package
+docker image build -t simpleague .
 docker container run -d --name simpleague -p 8080:8080 -p 4848:4848 -p 9009:9009 -e "TZ=America/New_York" simpleague
