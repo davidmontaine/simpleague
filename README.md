@@ -1,1 +1,2 @@
 # simpleague
+- Clone this repository.
