@@ -1,7 +1,9 @@
 # simpleague
 - Clone this repository.
 - I chose to download and install NetBeans and Glassfish therefore, domain.xml can be used.
+
 Server is configured to start in Debug Mode (java-config attribute debug-enabled is set to true).
+
 SMTP needs to be configured (mail-resource).
 
 
