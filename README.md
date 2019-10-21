@@ -9,3 +9,6 @@
 - mail.properties toAddressTesting needs to be set.
 - Integration tests are configured to run.  To turn off, set maven-failsafe-plugin attribute skipITs to false in pom.xml.
 - To run server in Docker container, run build-run.cmd in project folder or open file and run docker commands manually.
+- I chose MySQL as the database (actually MariaDB).
+
+  Run src/db/user.sql first followed by league.sql.
