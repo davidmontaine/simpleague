@@ -1,6 +1,6 @@
 # simpleague
 - Clone this repository.
-- I chose to download and install NetBeans and Glassfish therefore, domain.xml can be used.
+- I chose to download and install NetBeans and Glassfish therefore, domain.xml can be used (See ).
 
 Server is configured to start in Debug Mode.  Set java-config attribute debug-enabled to false to turn off.
 
