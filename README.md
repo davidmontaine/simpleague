@@ -12,4 +12,4 @@
 - I chose MySQL as the database (actually MariaDB).
 
   Run src/db/user.sql first followed by league.sql.
-- In src/loadtest is simpleague.jmx for JMeter load tests.
+- In src/loadtest is simpleague.jmx to run JMeter load tests.
