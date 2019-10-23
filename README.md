@@ -12,4 +12,6 @@
 
   Run src\db\user.sql first followed by league.sql.
 - To run server in Docker container, run build-run.cmd in project folder or open file to see and run docker commands manually.  
+
+  RUN asadmin enables Glassfish Administration Console to run.  This is really not necessary and can be commented out.
 - In src\loadtest is simpleague.jmx to run JMeter load tests.
