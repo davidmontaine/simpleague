@@ -6,7 +6,7 @@
 
   SMTP needs to be configured (see mail-resource).
   
-  If you don't run server in Docker container, change database host from host.docker.internal to localhost (or appropriate host name).
+  If you don't run server in Docker container, change database host from host.docker.internal to localhost (or appropriate host).
 - mail.properties toAddressTesting needs to be set.
 - Integration tests are configured to run.  To turn off, set maven-failsafe-plugin attribute skipITs to false in pom.xml.
 - I chose MySQL as the database (actually MariaDB).
