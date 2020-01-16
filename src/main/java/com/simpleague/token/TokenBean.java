@@ -41,7 +41,7 @@ public class TokenBean {
                 logger.log(Level.INFO, "starting cleanup");
                 Set<String> keys = tokens.keySet();
                 
-                keys.stream().forEach((String token) -> {
+                keys.forEach(token -> {
                     StampedUser stampedUser = tokens.get(token);
                     
                     if ((stampedUser != null) && (new Date().getTime() - stampedUser.getTimestamp().getTime() >= SESSION)) {

@@ -4,35 +4,104 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">      
+
     <h:body>
         <ui:composition template="../template.xhtml">
             <ui:define name="content">
                 <h3>#{msg['leagues.heading']}</h3>
-                <br />                                                                                                            
-                <h:form id="form">
-                    <p:dataTable var="league"
-                                 value="#{leagues.leagues}"
-                                 reflow="true"
-                                 rows="5"
-                                 paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}">
+                <h:form role="form" class="form-horizontal" id="leaguesForm">
+                    <div class="form-group">
+                        <div class="col-xs-6">                    
+                            <h:outputText value="#{leagues.error}" escape="false" style="color:#a94442" />
+                        </div>
+                    </div>                                        
+                    <div class="btn-toolbar" jsf:rendered="#{leagues.selectedLeague == null}">                                            
+                        <h:commandButton class="btn btn-primary btn-primary-spacing" id="add" value="#{msg['leagues.add']}" action="#{leagues.add}" />
+                        <h:commandButton class="btn btn-primary btn-primary-spacing" id="delete" value="#{msg['leagues.delete']}" action="#{leagues.delete}" />                    
+                        <br />
+                        <br />
+                    </div>
+                    <h:dataTable value="#{leagues.leagues}" var="league" columnClasses="leagues-column1, leagues-column2, leagues-column3, leagues-column4" rendered="#{leagues.selectedLeague == null}">
+                        <h:column>
+                            <h:selectBooleanCheckbox id="checkedLeagues" value="#{leagues.checkedLeagues[league]}" />
+                        </h:column>                        
+                        <h:column>
+                            <f:facet name="header" >
+                                <h:outputText value="#{msg['leagues.league']}" />
+                            </f:facet>    
+                            <h:commandLink action="#{leagues.select}" value="#{league.name}">
+                                <f:setPropertyActionListener target="#{leagues.selectedLeague}" value="#{league}" />
+                            </h:commandLink>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header" >
+                                <h:outputText value="#{msg['leagues.created']}" />
+                            </f:facet>    
+                            <h:outputFormat value="{0, date, MMM dd, yyyy}">
+                                <f:param value="#{league.createdDate}" />
+                            </h:outputFormat>
+                        </h:column>                    
+                        <h:column>
+                            <f:facet name="header" >
+                                <h:outputText value="#{msg['leagues.lastModified']}" />
+                            </f:facet>    
+                            <h:outputFormat value="{0, date, MMM dd, yyyy}" rendered="#{league.modifiedDate != null}">
+                                <f:param value="#{league.modifiedDate}" />
+                            </h:outputFormat>
+                        </h:column>                                        
+                    </h:dataTable>
+                    <div jsf:rendered="#{leagues.selectedLeague != null}">
+                        <div class="form-group required">
+                            <div class="col-xs-6">
+                                <h:outputLabel for="name" class="control-label">#{msg['leagues.name']}</h:outputLabel>
+                                <h:inputText class="form-control" id="name" p:autofocus="true" maxlength="50" value="#{leagues.selectedLeague.name}" requiredMessage="#{msg['leagues.name.invalid']}">
+                                    <f:validateRequired />
+                                </h:inputText>
+                                <h:message id="nameMessage" for="name" style="color:#a94442" />                            
+                            </div>
+                        </div>                    
+                        <div class="btn-toolbar">                        
+                            <h:commandButton class="btn btn-primary btn-primary-spacing" id="submit" value="#{msg['leagues.submit']}" action="#{leagues.submit}" />
+                            <h:button class="btn btn-default btn-primary-spacing" outcome="/auth/leagues.xhtml" value="#{msg['leagues.cancel']}" />
+                        </div>                        
+                    </div>
+                </h:form>
+                
+                <script>
+                    //<![CDATA[
+                    function enable() {
+                        $("#leaguesForm\\:delete").prop("disabled", true);                        
+                        
+                        if ($("#leaguesForm\\:name").val()) {
+                            $("#leaguesForm\\:submit").prop("disabled", false);
+                        } else {
+                            $("#leaguesForm\\:submit").prop("disabled", true);
+                        }                        
+                    }
+                    
+                    $(document).ready(function() {                       
+                        enable();
 
-                        <p:column headerText="Id">
-                            <h:outputText value="#{league.id}" />
-                        </p:column>
-                        <p:column headerText="Name">
-                            <h:outputText value="#{league.name}" />
-                        </p:column>
-                        <p:column headerText="Created Date">
-                            <h:outputText value="#{league.createdDate}" />
-                        </p:column>
-                        <p:column headerText="Modified Date">
-                            <h:outputText value="#{league.modifiedDate}" />
-                        </p:column>
-                    </p:dataTable>                    
-                </h:form>                
+                        $("input[type='checkbox']").click(function() {
+                            $("input[type='checkbox']").each(function() {
+                                if ($(this).is(":checked")) {
+                                    $("#leaguesForm\\:delete").prop("disabled", false);
+                                    return false;
+                                }                            
+                                $("#leaguesForm\\:delete").prop("disabled", true);                            
+                            });                                                
+                        });
+                        $("input").keyup(function() {
+                            enable();
+                        });
+                        if ($("#leaguesForm\\:nameMessage").text()) {
+                            $("#leaguesForm\\:name").parent().parent().addClass("has-error");
+                        }                                                  
+                    });                    
+                    //]]>
+                </script>                        
             </ui:define>
         </ui:composition>
     </h:body>

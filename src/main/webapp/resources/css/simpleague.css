@@ -7,3 +7,8 @@
     margin-left: -15px;
     position: absolute;
 }            
+
+.leagues-column1 { width: 20px; }
+.leagues-column2 { width: 200px; }
+.leagues-column3 { width: 200px; }
+.leagues-column4 { width: 200px; }
