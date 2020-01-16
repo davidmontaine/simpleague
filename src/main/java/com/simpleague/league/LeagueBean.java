@@ -1,8 +1,7 @@
 package com.simpleague.league;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,7 +20,12 @@ public class LeagueBean {
     public League find(Integer id) {
         return em.find(League.class, id);
     }
-    
+
+    public List<League> findAll() {
+        List<League> leagues = em.createNamedQuery("League.FindAll", League.class).getResultList();        
+        return leagues;
+    }    
+
     public League findByName(String name) {
         League league = null;        
         List<League> leagues = em.createNamedQuery("League.FindByName", League.class).setParameter("name", name).getResultList();
@@ -57,18 +61,8 @@ public class LeagueBean {
         }        
         em.remove(league);
     }   
-    
-    public List<League> createLeagues(int count) {
-        List<League> leagues = new ArrayList<>();
-        
-        for (int i = 0; i < count; i++) {
-            League league = new League();
-            league.setId(i);
-            league.setName("League " + i);
-            league.setCreatedDate(new Date());
-            league.setModifiedDate(new Date());
-            leagues.add(league);
-        }
-        return leagues;
-    }    
+
+    public void delete(Set<League> leagues) {
+        leagues.forEach(league -> {delete(league);});
+    }   
 }

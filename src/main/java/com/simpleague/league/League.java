@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "league", schema = "simpleague")
 @NamedQueries({
+    @NamedQuery(name = "League.FindAll", query = "SELECT l from League l ORDER BY l.name"),    
     @NamedQuery(name = "League.FindByName", query = "SELECT l FROM League l WHERE l.name = :name"),
     @NamedQuery(name = "League.FindByUserEmail", query = "SELECT l FROM League l WHERE l.user.credentials.email = :userEmail"),
     @NamedQuery(name = "League.FindByUserId", query = "SELECT l FROM League l WHERE l.user.id = :userId")
